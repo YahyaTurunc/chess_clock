@@ -24,6 +24,21 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "db0d0794-5537-46b5-a34d-483090c66fd1"
+      }
+    },
+    "owner": "yahyaturunc",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/db0d0794-5537-46b5-a34d-483090c66fd1"
     }
   }
 }
