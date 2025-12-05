@@ -28,7 +28,7 @@ const GameScreen = ({ route, navigation }) => {
         async function loadSound() {
             try {
                 const { sound } = await Audio.Sound.createAsync(
-                    require('../../assets/tick.mp3'),
+                    require('../../assets/tick1.mp3'),
                     { isLooping: true }
                 );
                 soundRef.current = sound;

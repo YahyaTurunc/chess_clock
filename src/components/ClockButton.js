@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, Dimensions } from 'react-native';
+import { useTheme } from '../context/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
@@ -7,17 +8,12 @@ const formatTime = (seconds) => {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = Math.floor(seconds % 60);
-    const ms = Math.floor((seconds % 1) * 10); // Tenths of a second
+    const ms = Math.floor((seconds % 1) * 10);
 
     if (h > 0) {
         return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
 
-    // If less than 10 seconds, show tenths? Optional, but nice for blitz.
-    // Standard chess clocks often show tenths under 20s or 10s.
-    // Let's keep it simple for now: MM:SS.
-    // If user wants high precision later we can add it.
-    // Actually, let's show tenths if < 10 seconds.
     if (seconds < 10 && seconds > 0) {
         return `${m}:${s.toString().padStart(2, '0')}.${ms}`;
     }
@@ -25,9 +21,10 @@ const formatTime = (seconds) => {
     return `${m}:${s.toString().padStart(2, '0')}`;
 };
 
-const ClockButton = ({ time, isActive, onPress, style, rotation = 0, moves, color }) => {
-    const backgroundColor = isActive ? '#5d9948' : '#b0b0b0'; // Green if active, Grey if inactive
-    const textColor = isActive ? '#ffffff' : '#312e2b'; // White text on green, Dark text on grey
+const ClockButton = ({ time, isActive, onPress, style, rotation = 0, moves }) => {
+    const { activeColor } = useTheme();
+    const backgroundColor = isActive ? activeColor : '#b0b0b0';
+    const textColor = isActive ? '#ffffff' : '#312e2b';
 
     return (
         <TouchableOpacity
@@ -56,7 +53,7 @@ const styles = StyleSheet.create({
     },
     timeText: {
         fontFamily: 'Jersey25_400Regular',
-        fontSize: width * 0.25, // Responsive font size
+        fontSize: width * 0.25,
         includeFontPadding: false,
         lineHeight: width * 0.25,
     },
